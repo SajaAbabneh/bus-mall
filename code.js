@@ -18,7 +18,7 @@ const viewResult = document.getElementById('viewbutton');
 let leftIndex = 0;
 let middleIndex = 0;
 let rightIndex = 0;
-const clickCounter = 5;
+const clickCounter = 25;
 
 TypeOfProduct.all = [];
 TypeOfProduct.counter = 0;
@@ -125,9 +125,9 @@ function myfunction() {
         data: clickArr,
         backgroundColor:
           'yellow',
-        borderColor: [
+        borderColor: 
           'pink',
-        ],
+        
         borderWidth: 2
       },{
         label: '# of Seen' ,
@@ -135,9 +135,9 @@ function myfunction() {
         backgroundColor:
           'red'
         ,
-        borderColor: [
+        borderColor: 
           'red',
-        ],
+        
         borderWidth: 2
       }]
     },
