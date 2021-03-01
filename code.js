@@ -115,8 +115,9 @@ function myfunction() {
     let liElement = document.createElement('li');
     ulElement.appendChild(liElement);
     liElement.textContent = `${TypeOfProduct.all[j].name} had ${TypeOfProduct.all[j].click} votes, and was seen ${TypeOfProduct.all[j].shown} times.`;
-
 }
+  // viewResult.removeEventListener('submit',result);
+
 }
 
 
