@@ -18,7 +18,7 @@ const viewResult = document.getElementById('viewbutton');
 let leftIndex = 0;
 let middleIndex = 0;
 let rightIndex = 0;
-const clickCounter = 25;
+const clickCounter = 5;
 
 TypeOfProduct.all = [];
 TypeOfProduct.counter = 0;
@@ -39,35 +39,28 @@ function getName( fileName ) {
   return fileName.split( '.' ).slice( 0, -1 ).join( '.' );
 }
 
-leftIndex = randomNumber(0, TypeOfProduct.all.length - 1);
-middleIndex = randomNumber(0, TypeOfProduct.all.length - 1);
-rightIndex = randomNumber(0, TypeOfProduct.all.length - 1);
-
-let newArr=[leftIndex,middleIndex,rightIndex];
+let newArr=[];
 
 function renderNewProduct() {
   document.getElementById('viewbutton').style.visibility = 'hidden';
-  while( newArr.includes(leftIndex) || newArr.includes(middleIndex) || newArr.includes(rightIndex)){
 
-    leftIndex = randomNumber(0, TypeOfProduct.all.length - 1);
-    middleIndex = randomNumber(0, TypeOfProduct.all.length - 1);
-    rightIndex = randomNumber(0, TypeOfProduct.all.length - 1);
-  }
-  newArr[0]=leftIndex;
-  newArr[1]=middleIndex;
-  newArr[2]=rightIndex;
-
+  leftIndex = randomNumber(0, TypeOfProduct.all.length - 1);
   leftImage.src = TypeOfProduct.all[leftIndex].image1;
+  newArr.push(leftIndex);
 
   do {
-    middleIndex;
+    middleIndex = randomNumber(0, TypeOfProduct.all.length - 1);
   } while (leftIndex === middleIndex);
   middleImage.src = TypeOfProduct.all[middleIndex].image1;
+  newArr.push(middleIndex);
+
 
   do {
-    rightIndex;
+    rightIndex = randomNumber(0, TypeOfProduct.all.length - 1);
   } while (leftIndex === rightIndex || middleIndex === rightIndex);
   rightImage.src = TypeOfProduct.all[rightIndex].image1;
+  newArr.push(rightIndex);
+
 
   TypeOfProduct.all[leftIndex].shown++;
   TypeOfProduct.all[middleIndex].shown++;
@@ -125,9 +118,9 @@ function myfunction() {
         data: clickArr,
         backgroundColor:
           'yellow',
-        borderColor: 
+        borderColor:
           'pink',
-        
+
         borderWidth: 2
       },{
         label: '# of Seen' ,
@@ -135,9 +128,9 @@ function myfunction() {
         backgroundColor:
           'red'
         ,
-        borderColor: 
+        borderColor:
           'red',
-        
+
         borderWidth: 2
       }]
     },
@@ -152,17 +145,23 @@ function myfunction() {
     }
   });
 
-  //   let ulElement = document.getElementById('Result');
-  //   for (let j = 0; j < TypeOfProduct.all.length - 1; j++) {
-  //     let liElement = document.createElement('li');
-  //     ulElement.appendChild(liElement);
-  //     liElement.textContent = `${TypeOfProduct.all[j].name} had ${TypeOfProduct.all[j].click} votes, and was seen ${TypeOfProduct.all[j].shown} times.`;
+  let ulElement = document.getElementById('Result');
+  for (let j = 0; j < TypeOfProduct.all.length - 1; j++) {
+    let liElement = document.createElement('li');
+    ulElement.appendChild(liElement);
+    liElement.textContent = `${TypeOfProduct.all[j].name} had ${TypeOfProduct.all[j].click} votes, and was seen ${TypeOfProduct.all[j].shown} times.`;
 
-  // }
+  }
 }
 
 function randomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  let lastArr = Math.floor(Math.random() * (max - min + 1)) + min;
+  for(let i =0 ; i < newArr.length ; i++){
+    if(lastArr === newArr[i]){
+      lastArr = Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+  }
+  return lastArr;
 }
 
 
