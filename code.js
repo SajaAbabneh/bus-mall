@@ -78,21 +78,31 @@ function handelclick(event) {
   if (TypeOfProduct.counter < clickCounter) {
     const clickedElement = event.target;
     if (clickedElement.id === 'leftImage' || clickedElement === 'middleImage' || clickedElement === 'rightImage') {
+      
       if (clickedElement.id === 'leftImage') {
         TypeOfProduct.all[leftIndex].click++;
+        TypeOfProduct.counter++;
+        renderNewProduct();
       }
       if (clickedElement.id === 'middleImage') {
         TypeOfProduct.all[middleIndex].click++;
+        TypeOfProduct.counter++;
+        renderNewProduct();
+
       }
       if (clickedElement.id === 'rightImage') {
         TypeOfProduct.all[rightIndex].click++;
+        TypeOfProduct.counter++;
+        renderNewProduct();
+
       }
 
     }
-    TypeOfProduct.counter++;
-
-    renderNewProduct();
+    // localStorage.setItem('orders',JSON.stringify(TypeOfProduct.all));
+    // TypeOfProduct.counter++;
+    // renderNewProduct();
   } else {
+    localStorage.setItem('orders',JSON.stringify(TypeOfProduct.all));
     for(let i =0 ; i < TypeOfProduct.all.length; i++){
       viewArr.push(TypeOfProduct.all[i].shown);
       clickArr.push(TypeOfProduct.all[i].click);
@@ -162,6 +172,10 @@ function randomNumber(min, max) {
     }
   }
   return lastArr;
+}
+
+if(localStorage.getItem('orders')){
+  TypeOfProduct.all=JSON.parse(localStorage.getItem('orders'));
 }
 
 
